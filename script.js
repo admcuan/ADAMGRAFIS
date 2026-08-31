@@ -6,9 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function showLoader(callback) {
     if (loader) {
       loader.classList.add("active");
-      setTimeout(() => {
-        if (callback) callback();
-      }, 500);
+      setTimeout(() => { if (callback) callback(); }, 400);
     } else {
       if (callback) callback();
     }
@@ -16,15 +14,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function hideLoader() {
     if (loader) {
-      setTimeout(() => {
-        loader.classList.remove("active");
-      }, 300);
+      setTimeout(() => { loader.classList.remove("active"); }, 250);
     }
   }
 
   hideLoader();
 
-  // 2. Theme Management Via URL Parameter
+  // 2. Theme Management
   const urlParams = new URLSearchParams(window.location.search);
   let currentTheme = urlParams.get('theme') || 'dark';
 
@@ -48,9 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         link.onclick = (e) => {
           e.preventDefault();
-          showLoader(() => {
-            window.location.href = `${cleanHref}?theme=${theme}`;
-          });
+          showLoader(() => { window.location.href = `${cleanHref}?theme=${theme}`; });
         };
       }
     });
@@ -69,118 +63,111 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 3. 3D Parallax Tilt Effect on Mouse move
+  // 3. 3D Parallax Tilt Effect (Diaktifkan Hanya Pada Layar Desktop > 768px)
   const tiltCards = document.querySelectorAll(".tilt-card");
 
-  tiltCards.forEach(card => {
-    const maxTilt = parseFloat(card.getAttribute("data-tilt-max")) || 15;
+  function handleTilt(e) {
+    if (window.innerWidth <= 768) return;
+
+    const card = e.currentTarget;
+    const maxTilt = parseFloat(card.getAttribute("data-tilt-max")) || 12;
     const children = card.querySelectorAll(".tilt-child");
 
-    card.addEventListener("mousemove", (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
 
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
 
-      const tiltX = ((y - centerY) / centerY) * -maxTilt;
-      const tiltY = ((x - centerX) / centerX) * maxTilt;
+    const tiltX = ((y - centerY) / centerY) * -maxTilt;
+    const tiltY = ((x - centerX) / centerX) * maxTilt;
 
-      card.style.transform = `rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg)`;
+    card.style.transform = `rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg)`;
 
-      children.forEach(child => {
-        const depth = parseFloat(child.getAttribute("data-depth")) || 10;
-        const moveX = ((x - centerX) / centerX) * depth;
-        const moveY = ((y - centerY) / centerY) * depth;
-        child.style.transform = `translate3d(${moveX.toFixed(2)}px, ${moveY.toFixed(2)}px, ${depth}px)`;
-      });
+    children.forEach(child => {
+      const depth = parseFloat(child.getAttribute("data-depth")) || 8;
+      const moveX = ((x - centerX) / centerX) * depth;
+      const moveY = ((y - centerY) / centerY) * depth;
+      child.style.transform = `translate3d(${moveX.toFixed(2)}px, ${moveY.toFixed(2)}px, ${depth}px)`;
     });
+  }
 
-    card.addEventListener("mouseleave", () => {
-      card.style.transform = `rotateX(0deg) rotateY(0deg)`;
-      children.forEach(child => {
-        child.style.transform = `translate3d(0px, 0px, 0px)`;
-      });
+  function resetTilt(e) {
+    const card = e.currentTarget;
+    card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+    card.querySelectorAll(".tilt-child").forEach(child => {
+      child.style.transform = `translate3d(0px, 0px, 0px)`;
     });
+  }
+
+  tiltCards.forEach(card => {
+    card.addEventListener("mousemove", handleTilt);
+    card.addEventListener("mouseleave", resetTilt);
   });
 
-  // 4. Background Mouse Scroll & Move Parallax Orbs
+  // 4. Background Mouse Move Parallax Orbs
   const bgOrbs = document.querySelectorAll(".glow-orb");
-
   document.addEventListener("mousemove", (e) => {
+    if (window.innerWidth <= 768) return;
     const mouseX = e.clientX - window.innerWidth / 2;
     const mouseY = e.clientY - window.innerHeight / 2;
 
     bgOrbs.forEach(orb => {
-      const speed = parseFloat(orb.getAttribute("data-parallax-speed")) || 0.05;
+      const speed = parseFloat(orb.getAttribute("data-parallax-speed")) || 0.04;
       orb.style.transform = `translate3d(${mouseX * speed}px, ${mouseY * speed}px, 0)`;
     });
   });
 
-  // 5. Lightbox Modal Gambar
+  // 5. Lightbox Modal Gambar (Fixed Logic)
   const modal = document.getElementById("lightboxModal");
   const modalImg = document.getElementById("lightboxImg");
   const captionText = document.getElementById("lightboxCaption");
   const closeBtn = document.querySelector(".lightbox-close");
 
-  document.querySelectorAll(".portfolio-card").forEach(card => {
-    card.addEventListener("click", () => {
-      const img = card.querySelector("img");
-      const title = card.querySelector(".card-title")?.innerText || "";
-      if (modal && modalImg) {
-        modal.style.display = "flex";
-        setTimeout(() => modal.classList.add("active"), 10);
-        modalImg.src = img.src;
-        if (captionText) captionText.innerText = title;
-      }
-    });
-  });
-
-  if (closeBtn) {
-    closeBtn.addEventListener("click", () => {
-      if (modal) {
-        modal.classList.remove("active");
-        setTimeout(() => modal.style.display = "none", 300);
-      }
-    });
-  }
-
-  // 6. Stat Counter Animation
-  const counters = document.querySelectorAll(".counter");
-  if (counters.length > 0) {
-    counters.forEach(counter => {
-      const target = +counter.getAttribute("data-target");
-      let count = 0;
-      const speed = target / 30;
-      const updateCount = () => {
-        count += speed;
-        if (count < target) {
-          counter.innerText = Math.ceil(count);
-          setTimeout(updateCount, 30);
-        } else {
-          counter.innerText = target + "+";
+  function attachLightboxEvents() {
+    document.querySelectorAll(".portfolio-card").forEach(card => {
+      card.onclick = () => {
+        const img = card.querySelector("img");
+        const title = card.querySelector(".card-title")?.innerText || "";
+        if (modal && modalImg && img) {
+          modal.style.display = "flex";
+          modalImg.src = img.src;
+          if (captionText) captionText.innerText = title;
         }
       };
-      updateCount();
     });
   }
 
-  // 7. Portfolio Filter & Search
+  attachLightboxEvents();
+
+  if (closeBtn) {
+    closeBtn.onclick = () => { if (modal) modal.style.display = "none"; };
+  }
+
+  if (modal) {
+    modal.onclick = (e) => {
+      if (e.target === modal) modal.style.display = "none";
+    };
+  }
+
+  // 6. Portfolio Filter & Search Real-Time
   const filterBtns = document.querySelectorAll(".filter-btn");
   const portfolioItems = document.querySelectorAll(".portfolio-card");
   const searchInput = document.getElementById("searchPortfolio");
 
   function filterPortfolio() {
-    const filterValue = document.querySelector(".filter-btn.active")?.getAttribute("data-filter") || "all";
-    const searchValue = searchInput ? searchInput.value.toLowerCase() : "";
+    const activeBtn = document.querySelector(".filter-btn.active");
+    const filterValue = activeBtn ? activeBtn.getAttribute("data-filter") : "all";
+    const searchValue = searchInput ? searchInput.value.trim().toLowerCase() : "";
 
     portfolioItems.forEach(item => {
-      const category = item.getAttribute("data-category");
+      const category = item.getAttribute("data-category") || "";
       const title = item.querySelector(".card-title")?.innerText.toLowerCase() || "";
+      const desc = item.querySelector(".card-desc")?.innerText.toLowerCase() || "";
       
       const matchesFilter = (filterValue === "all" || category === filterValue);
-      const matchesSearch = title.includes(searchValue);
+      const matchesSearch = title.includes(searchValue) || desc.includes(searchValue);
 
       if (matchesFilter && matchesSearch) {
         item.style.display = "block";
@@ -199,7 +186,27 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   if (searchInput) {
-    searchInput.addEventListener("keyup", filterPortfolio);
+    searchInput.addEventListener("input", filterPortfolio);
+  }
+
+  // 7. Stat Counter Animation
+  const counters = document.querySelectorAll(".counter");
+  if (counters.length > 0) {
+    counters.forEach(counter => {
+      const target = +counter.getAttribute("data-target");
+      let count = 0;
+      const speed = target / 25;
+      const updateCount = () => {
+        count += speed;
+        if (count < target) {
+          counter.innerText = Math.ceil(count);
+          setTimeout(updateCount, 30);
+        } else {
+          counter.innerText = target + "+";
+        }
+      };
+      updateCount();
+    });
   }
 
   // 8. Dynamic Price Estimator & WhatsApp Order Link
@@ -247,7 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const backToTopBtn = document.getElementById("backToTop");
   if (backToTopBtn) {
     window.addEventListener("scroll", () => {
-      if (window.scrollY > 300) {
+      if (window.scrollY > 250) {
         backToTopBtn.style.display = "flex";
       } else {
         backToTopBtn.style.display = "none";
