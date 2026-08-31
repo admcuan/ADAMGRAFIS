@@ -1,109 +1,94 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beranda — Adam Grafis (3D Parallax)</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Adam Grafis - Beranda</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-  <!-- Smooth Page Transition Loader -->
-  <div id="pageLoader" class="active">
-    <div class="spinner"></div>
-    <div class="loader-text">MEMUAT TAMPILAN 3D...</div>
-  </div>
-
-  <!-- Ambient Glowing Parallax Background Spheres -->
   <div class="parallax-bg-glow">
-    <div class="glow-orb orb-1" data-parallax-speed="-0.05"></div>
-    <div class="glow-orb orb-2" data-parallax-speed="0.08"></div>
-    <div class="glow-orb orb-3" data-parallax-speed="-0.03"></div>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
   </div>
 
-  <header class="parallax-header">
-    <a href="index.html" class="brand tilt-card" data-tilt-max="15">
-      <img src="logo AG.png" alt="Adam Grafis Logo" class="brand-logo-3d">
-      <span class="brand-name">ADAM GRAFIS</span>
+  <div id="pageLoader"><div class="spinner"></div></div>
+
+  <header>
+    <a href="index.html" class="brand">
+      <i class="fa-solid fa-pen-nib" style="color: var(--accent-color);"></i>
+      <span>Adam Grafis</span>
     </a>
     <ul class="nav-links">
       <li><a href="index.html" class="active">Beranda</a></li>
       <li><a href="portofolio.html">Portofolio</a></li>
       <li><a href="pemesanan.html">Pemesanan</a></li>
-      <li><button id="themeToggle" class="theme-toggle"><i class="fa-solid fa-sun"></i></button></li>
     </ul>
+    <button class="theme-toggle" id="themeToggle"><i class="fa-solid fa-sun"></i></button>
   </header>
 
-  <!-- 3D Parallax Hero Section -->
-  <section class="hero-section 3d-hero">
-    <div class="hero-parallax-container">
-      <div class="hero-card-3d tilt-card" data-tilt-max="20">
-        <div class="animated-logo-wrapper tilt-child" data-depth="40">
-          <img src="logo AG.png" alt="Adam Grafis Animated Logo" class="animated-logo 3d-shadow">
-        </div>
-        <h1 class="hero-title tilt-child" data-depth="30">Solusi Desain Visual Premium</h1>
-        <p class="hero-subtitle tilt-child" data-depth="20">Meningkatkan kualitas visual acara, branding, dan publikasi Anda dengan presisi tinggi dan efek 3D interaktif.</p>
-        <div class="btn-wrapper tilt-child" data-depth="25">
-          <a href="pemesanan.html" class="btn-main btn-primary 3d-btn"><i class="fa-solid fa-cart-shopping"></i> Buat Pesanan</a>
-          <a href="portofolio.html" class="btn-main btn-whatsapp 3d-btn"><i class="fa-solid fa-images"></i> Lihat Karya</a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <main class="page-container">
+    <div class="bento-grid">
+      
+      <section class="bento-card bento-hero">
+        <h1>Layanan Desain Grafis Kreatif & Presisi</h1>
+        <p>Meningkatkan citra visual bisnis Anda melalui desain banner, flyer, dan panggung berkualitas tinggi.</p>
+        <a href="pemesanan.html" class="btn-main btn-primary">
+          <i class="fa-solid fa-cart-shopping"></i> Buat Pesanan
+        </a>
+      </section>
 
-  <!-- 3D Layanan Section -->
-  <main class="page-container" style="padding-top: 20px;">
-    <h2 class="section-title">Layanan Unggulan</h2>
-    <p class="section-subtitle">Pilihan solusi visual yang disesuaikan dengan kebutuhan Anda</p>
-    
-    <div class="portfolio-grid">
-      <div class="portfolio-card tilt-card" data-tilt-max="25">
-        <div class="tilt-child" data-depth="20">
-          <i class="fa-solid fa-scroll fa-3x service-icon-3d"></i>
+      <section class="bento-card bento-stats">
+        <div class="stat-box">
+          <h3 class="counter" data-target="150">0</h3>
+          <p>Projek Selesai</p>
         </div>
-        <h3 class="card-title tilt-child" data-depth="15">Spanduk & Baliho</h3>
-        <p class="card-desc tilt-child" data-depth="10">Desain spanduk resolusi tinggi siap cetak untuk panggung, baliho, dan event besar dengan visual yang memukau.</p>
-      </div>
+        <div class="stat-box">
+          <h3 class="counter" data-target="98">0</h3>
+          <p>Kepuasan Klien (%)</p>
+        </div>
+      </section>
 
-      <div class="portfolio-card tilt-card" data-tilt-max="25">
-        <div class="tilt-child" data-depth="20">
-          <i class="fa-solid fa-file-powerpoint fa-3x service-icon-3d"></i>
+      <section class="bento-card bento-portfolio-item portfolio-card" data-category="spanduk">
+        <div class="bento-img-container">
+          <img src="https://picsum.photos/600/400?random=1" alt="Spanduk Event">
         </div>
-        <h3 class="card-title tilt-child" data-depth="15">Flyer & Brosur</h3>
-        <p class="card-desc tilt-child" data-depth="10">Publikasi digital dan cetak dengan tata letak informatif, estetis, dan gaya modern untuk efektivitas promosi.</p>
-      </div>
+        <div class="bento-card-body">
+          <span class="bento-tag">Spanduk</span>
+          <h3 class="bento-card-title">Banner Event Komunitas</h3>
+          <p class="bento-card-desc">Desain spanduk outdoor resolusi tinggi.</p>
+        </div>
+      </section>
 
-      <div class="portfolio-card tilt-card" data-tilt-max="25">
-        <div class="tilt-child" data-depth="20">
-          <i class="fa-solid fa-icons fa-3x service-icon-3d"></i>
+      <section class="bento-card bento-portfolio-item portfolio-card" data-category="flyer">
+        <div class="bento-img-container">
+          <img src="https://picsum.photos/600/400?random=2" alt="Flyer Promosi">
         </div>
-        <h3 class="card-title tilt-child" data-depth="15">Identitas Visual & Logo</h3>
-        <p class="card-desc tilt-child" data-depth="10">Branding identitas unik untuk organisasi, produk, maupun event profesional dengan karakter visual kuat.</p>
-      </div>
+        <div class="bento-card-body">
+          <span class="bento-tag">Flyer</span>
+          <h3 class="bento-card-title">Flyer Digital Marketing</h3>
+          <p class="bento-card-desc">Format promosi optimal untuk media sosial.</p>
+        </div>
+      </section>
+
+      <section class="bento-card bento-portfolio-item portfolio-card" data-category="stage">
+        <div class="bento-img-container">
+          <img src="https://picsum.photos/600/400?random=3" alt="Background Stage">
+        </div>
+        <div class="bento-card-body">
+          <span class="bento-tag">Stage</span>
+          <h3 class="bento-card-title">Backdrop Panggung Acara</h3>
+          <p class="bento-card-desc">Layout panggung megah berstandar seminar.</p>
+        </div>
+      </section>
+
     </div>
   </main>
 
-  <!-- 3D Stats Counter Section -->
-  <section class="stats-section">
-    <div class="stat-card tilt-card" data-tilt-max="15">
-      <h3 class="counter tilt-child" data-depth="20" data-target="150">0</h3>
-      <p class="tilt-child" data-depth="10">Proyek Selesai</p>
-    </div>
-    <div class="stat-card tilt-card" data-tilt-max="15">
-      <h3 class="counter tilt-child" data-depth="20" data-target="99">0</h3>
-      <p class="tilt-child" data-depth="10">Kepuasan Klien (%)</p>
-    </div>
-    <div class="stat-card tilt-card" data-tilt-max="15">
-      <h3 class="counter tilt-child" data-depth="20" data-target="24">0</h3>
-      <p class="tilt-child" data-depth="10">Jam Respon Cepat</p>
-    </div>
-  </section>
-
-  <button id="backToTop" class="back-to-top 3d-btn"><i class="fa-solid fa-arrow-up"></i></button>
-
   <footer>
-    <p>&copy; 2026 Adam Grafis. All Rights Reserved.</p>
+    <p>&copy; 2026 Adam Grafis. Seluruh Hak Cipta Dilindungi.</p>
   </footer>
 
   <script src="script.js"></script>
