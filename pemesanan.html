@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pemesanan — Adam Grafis</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Smooth Page Transition Loader -->
+  <div id="pageLoader" class="active">
+    <div class="spinner"></div>
+    <div class="loader-text">TUNGGU SEBENTAR YAA...</div>
+  </div>
+
+  <header>
+    <a href="index.html" class="brand">
+      <img src="logo AG.png" alt="Adam Grafis Logo">
+      <span class="brand-name">ADAM GRAFIS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Beranda</a></li>
+      <li><a href="portofolio.html">Portofolio</a></li>
+      <li><a href="pemesanan.html" class="active">Pemesanan</a></li>
+      <li><button id="themeToggle" class="theme-toggle"><i class="fa-solid fa-sun"></i></button></li>
+    </ul>
+  </header>
+
+  <main class="page-container">
+    <h1 class="section-title">Formulir Pemesanan</h1>
+    <p class="section-subtitle">Kalkulasikan estimasi harga dan konsultasikan desain Anda langsung ke WhatsApp</p>
+
+    <div class="order-container">
+      <form id="orderForm" onsubmit="event.preventDefault();">
+        <div class="form-group">
+          <label for="clientName">Nama Lengkap</label>
+          <input type="text" id="clientName" class="form-control" placeholder="Masukkan nama Anda" required>
+        </div>
+
+        <div class="form-group">
+          <label for="orderCategory">Kategori Desain</label>
+          <select id="orderCategory" class="form-control">
+            <option value="spanduk">Spanduk / Banner (per Meter)</option>
+            <option value="flyer">Flyer / Brosur (per Paket)</option>
+            <option value="stage">Stage / Rigging Backdrop (per Meter)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="orderSize">Jumlah / Ukuran (Meter/Unit)</label>
+          <input type="number" id="orderSize" class="form-control" value="1" min="1" required>
+        </div>
+
+        <div class="form-group">
+          <label for="orderNotes">Catatan / Detail Acara</label>
+          <textarea id="orderNotes" class="form-control" rows="4" placeholder="Jelaskan konsep yang diinginkan..."></textarea>
+        </div>
+      </form>
+
+      <div class="price-box">
+        <h3>Estimasi Biaya</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9rem;">Perhitungan awal berdasarkan pilihan Anda:</p>
+        <div class="price-amount" id="estimatedPrice">Rp 0</div>
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 20px;">*Harga final dapat menyesuaikan dengan tingkat kesulitan revisi dan konsep.</p>
+        
+        <a href="https://wa.me/6283874795123?text=Halo%20Adam%20Grafis,%20saya%20ingin%20konsultasi%20pemesanan%20desain" target="_blank" class="btn-main btn-whatsapp" style="width: 100%; justify-content: center;">
+          <i class="fa-brands fa-whatsapp fa-lg"></i> Kirim via WhatsApp
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <button id="backToTop" class="back-to-top"><i class="fa-solid fa-arrow-up"></i></button>
+
+  <footer>
+    <p>&copy; 2026 Adam Grafis. All Rights Reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
