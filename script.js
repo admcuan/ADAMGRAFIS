@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  // 1. Loading Overlay Controller (Smooth Transition)
+  // 1. Loading Overlay Controller
   const loader = document.getElementById("pageLoader");
 
   function showLoader(callback) {
@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
       loader.classList.add("active");
       setTimeout(() => {
         if (callback) callback();
-      }, 700); // Animasi loading dibuat tidak terlalu cepat (700ms)
+      }, 700);
     } else {
       if (callback) callback();
     }
@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Sembunyikan loader saat halaman awal selesai dimuat
   hideLoader();
 
   // 2. Theme Management Via URL Parameter
@@ -47,7 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
         let cleanHref = href.split('?')[0];
         link.setAttribute("href", `${cleanHref}?theme=${theme}`);
 
-        // Tambahkan efek loading saat mengklik tautan antar-halaman
         link.onclick = (e) => {
           e.preventDefault();
           showLoader(() => {
@@ -80,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".portfolio-card").forEach(card => {
     card.addEventListener("click", () => {
       const img = card.querySelector("img");
-      const title = card.querySelector(".card-title").innerText;
+      const title = card.querySelector(".card-title")?.innerText || "";
       if (modal && modalImg) {
         modal.style.display = "flex";
         modalImg.src = img.src;
@@ -124,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     portfolioItems.forEach(item => {
       const category = item.getAttribute("data-category");
-      const title = item.querySelector(".card-title").innerText.toLowerCase();
+      const title = item.querySelector(".card-title")?.innerText.toLowerCase() || "";
       
       const matchesFilter = (filterValue === "all" || category === filterValue);
       const matchesSearch = title.includes(searchValue);
@@ -149,13 +147,16 @@ document.addEventListener("DOMContentLoaded", () => {
     searchInput.addEventListener("keyup", filterPortfolio);
   }
 
-  // 6. Price Estimator (Order Page)
+  // 6. Price Estimator & Dynamic WhatsApp Ordering
   const categorySelect = document.getElementById("orderCategory");
   const sizeInput = document.getElementById("orderSize");
   const priceDisplay = document.getElementById("estimatedPrice");
+  const clientNameInput = document.getElementById("clientName");
+  const orderNotesInput = document.getElementById("orderNotes");
+  const waBtn = document.getElementById("sendWaBtn");
 
   function calculatePrice() {
-    if (!categorySelect || !sizeInput || !priceDisplay) return;
+    if (!categorySelect || !sizeInput || !priceDisplay) return 0;
 
     const baseRates = { spanduk: 25000, flyer: 150000, stage: 50000 };
     const selectedCategory = categorySelect.value;
@@ -163,12 +164,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let total = (baseRates[selectedCategory] || 0) * qty;
     priceDisplay.innerText = "Rp " + total.toLocaleString("id-ID");
+    return total;
   }
 
   if (categorySelect && sizeInput) {
     categorySelect.addEventListener("change", calculatePrice);
     sizeInput.addEventListener("input", calculatePrice);
     calculatePrice();
+  }
+
+  if (waBtn) {
+    waBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const name = clientNameInput ? clientNameInput.value.trim() : "Pelanggan";
+      const categoryText = categorySelect ? categorySelect.options[categorySelect.selectedIndex].text : "-";
+      const qty = sizeInput ? sizeInput.value : "1";
+      const notes = orderNotesInput ? orderNotesInput.value.trim() : "Tidak ada catatan.";
+      const totalPrice = calculatePrice();
+
+      const textMessage = `Halo Adam Grafis,%0A%0ASaya ingin memesan jasa desain dengan rincian berikut:%0A- *Nama*: ${encodeURIComponent(name)}%0A- *Kategori*: ${encodeURIComponent(categoryText)}%0A- *Jumlah/Ukuran*: ${encodeURIComponent(qty)}%0A- *Estimasi Total*: Rp ${totalPrice.toLocaleString("id-ID")}%0A- *Catatan*: ${encodeURIComponent(notes)}%0A%0AMohon konfirmasi proses selanjutnya. Terima kasih!`;
+
+      window.open(`https://wa.me/6283874795123?text=${textMessage}`, "_blank");
+    });
   }
 
   // 7. Back-to-Top Button
