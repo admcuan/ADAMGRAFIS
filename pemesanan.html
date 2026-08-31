@@ -1,86 +1,79 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pemesanan — Adam Grafis (3D Parallax)</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Adam Grafis - Pemesanan</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-  <!-- Smooth Page Transition Loader -->
-  <div id="pageLoader" class="active">
-    <div class="spinner"></div>
-    <div class="loader-text">MEMUAT SISTEM PESANAN...</div>
-  </div>
-
   <div class="parallax-bg-glow">
-    <div class="glow-orb orb-1" data-parallax-speed="-0.03"></div>
-    <div class="glow-orb orb-3" data-parallax-speed="0.05"></div>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
   </div>
 
-  <header class="parallax-header">
-    <a href="index.html" class="brand tilt-card" data-tilt-max="15">
-      <img src="logo AG.png" alt="Adam Grafis Logo" class="brand-logo-3d">
-      <span class="brand-name">ADAM GRAFIS</span>
+  <div id="pageLoader"><div class="spinner"></div></div>
+
+  <header>
+    <a href="index.html" class="brand">
+      <i class="fa-solid fa-pen-nib" style="color: var(--accent-color);"></i>
+      <span>Adam Grafis</span>
     </a>
     <ul class="nav-links">
       <li><a href="index.html">Beranda</a></li>
       <li><a href="portofolio.html">Portofolio</a></li>
       <li><a href="pemesanan.html" class="active">Pemesanan</a></li>
-      <li><button id="themeToggle" class="theme-toggle"><i class="fa-solid fa-sun"></i></button></li>
     </ul>
+    <button class="theme-toggle" id="themeToggle"><i class="fa-solid fa-sun"></i></button>
   </header>
 
   <main class="page-container">
-    <h1 class="section-title">Formulir Pemesanan</h1>
-    <p class="section-subtitle">Hitung estimasi otomatis dan kirim rincian pesanan langsung ke WhatsApp</p>
+    <div class="bento-grid">
+      
+      <section class="bento-card bento-order-form">
+        <h2 style="margin-bottom: 20px; font-size: 1.5rem;">Formulir Pemesanan Desain</h2>
+        <form id="orderForm">
+          <div class="form-group">
+            <label for="clientName">Nama Lengkap / Pemesan</label>
+            <input type="text" id="clientName" class="form-control" placeholder="Masukkan nama Anda" required>
+          </div>
 
-    <div class="order-container">
-      <form id="orderForm" class="tilt-card" data-tilt-max="10" onsubmit="event.preventDefault();">
-        <div class="form-group tilt-child" data-depth="10">
-          <label for="clientName">Nama Lengkap</label>
-          <input type="text" id="clientName" class="form-control 3d-input" placeholder="Masukkan nama Anda" required>
-        </div>
+          <div class="form-group">
+            <label for="orderCategory">Kategori Desain</label>
+            <select id="orderCategory" class="form-control">
+              <option value="spanduk">Spanduk / Banner (Rp 25.000 / Meter)</option>
+              <option value="flyer">Flyer / Brosur (Rp 150.000 / Paket)</option>
+              <option value="stage">Background Stage / Panggung (Rp 50.000 / Meter)</option>
+            </select>
+          </div>
 
-        <div class="form-group tilt-child" data-depth="10">
-          <label for="orderCategory">Kategori Desain</label>
-          <select id="orderCategory" class="form-control 3d-input">
-            <option value="spanduk">Spanduk / Banner (per Meter)</option>
-            <option value="flyer">Flyer / Brosur (per Paket)</option>
-            <option value="stage">Stage / Rigging Backdrop (per Meter)</option>
-          </select>
-        </div>
+          <div class="form-group">
+            <label for="orderSize">Jumlah / Ukuran (Meter/Pcs)</label>
+            <input type="number" id="orderSize" class="form-control" value="1" min="1" required>
+          </div>
 
-        <div class="form-group tilt-child" data-depth="10">
-          <label for="orderSize">Jumlah / Ukuran (Meter/Unit)</label>
-          <input type="number" id="orderSize" class="form-control 3d-input" value="1" min="1" required>
-        </div>
+          <div class="form-group">
+            <label for="orderNotes">Catatan / Detail Konsep Desain</label>
+            <textarea id="orderNotes" class="form-control" rows="4" placeholder="Tuliskan warna utama, teks spanduk, atau referensi konsep..."></textarea>
+          </div>
+        </form>
+      </section>
 
-        <div class="form-group tilt-child" data-depth="10">
-          <label for="orderNotes">Catatan / Detail Acara</label>
-          <textarea id="orderNotes" class="form-control 3d-input" rows="4" placeholder="Jelaskan konsep yang diinginkan..."></textarea>
-        </div>
-      </form>
-
-      <div class="price-box tilt-card" data-tilt-max="15">
-        <h3 class="tilt-child" data-depth="15">Estimasi Biaya</h3>
-        <p class="tilt-child" data-depth="10" style="color: var(--text-secondary); font-size: 0.9rem;">Perhitungan otomatis berdasarkan pilihan:</p>
-        <div class="price-amount tilt-child" data-depth="25" id="estimatedPrice">Rp 0</div>
-        <p class="tilt-child" data-depth="10" style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 20px;">*Harga final dapat menyesuaikan dengan tingkat kesulitan revisi dan konsep.</p>
-        
-        <button id="sendWaBtn" class="btn-main btn-whatsapp 3d-btn tilt-child" data-depth="20" style="width: 100%; justify-content: center;">
-          <i class="fa-brands fa-whatsapp fa-lg"></i> Kirim via WhatsApp
+      <section class="bento-card bento-order-summary">
+        <h3 style="font-size: 1.2rem; color: var(--text-secondary);">Estimasi Biaya</h3>
+        <div id="estimatedPrice" class="price-amount">Rp 0</div>
+        <button type="button" id="sendWaBtn" class="btn-main btn-whatsapp" style="width: 100%; justify-content: center; margin-top: 16px;">
+          <i class="fa-brands fa-whatsapp"></i> Kirim via WhatsApp
         </button>
-      </div>
+      </section>
+
     </div>
   </main>
 
-  <button id="backToTop" class="back-to-top 3d-btn"><i class="fa-solid fa-arrow-up"></i></button>
-
   <footer>
-    <p>&copy; 2026 Adam Grafis. All Rights Reserved.</p>
+    <p>&copy; 2026 Adam Grafis. Seluruh Hak Cipta Dilindungi.</p>
   </footer>
 
   <script src="script.js"></script>
