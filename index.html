@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beranda — Adam Grafis (3D Parallax)</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Smooth Page Transition Loader -->
+  <div id="pageLoader" class="active">
+    <div class="spinner"></div>
+    <div class="loader-text">MEMUAT TAMPILAN 3D...</div>
+  </div>
+
+  <!-- Ambient Glowing Parallax Background Spheres -->
+  <div class="parallax-bg-glow">
+    <div class="glow-orb orb-1" data-parallax-speed="-0.05"></div>
+    <div class="glow-orb orb-2" data-parallax-speed="0.08"></div>
+    <div class="glow-orb orb-3" data-parallax-speed="-0.03"></div>
+  </div>
+
+  <header class="parallax-header">
+    <a href="index.html" class="brand tilt-card" data-tilt-max="15">
+      <img src="logo AG.png" alt="Adam Grafis Logo" class="brand-logo-3d">
+      <span class="brand-name">ADAM GRAFIS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Beranda</a></li>
+      <li><a href="portofolio.html">Portofolio</a></li>
+      <li><a href="pemesanan.html">Pemesanan</a></li>
+      <li><button id="themeToggle" class="theme-toggle"><i class="fa-solid fa-sun"></i></button></li>
+    </ul>
+  </header>
+
+  <!-- 3D Parallax Hero Section -->
+  <section class="hero-section 3d-hero">
+    <div class="hero-parallax-container">
+      <div class="hero-card-3d tilt-card" data-tilt-max="20">
+        <div class="animated-logo-wrapper tilt-child" data-depth="40">
+          <img src="logo AG.png" alt="Adam Grafis Animated Logo" class="animated-logo 3d-shadow">
+        </div>
+        <h1 class="hero-title tilt-child" data-depth="30">Solusi Desain Visual Premium</h1>
+        <p class="hero-subtitle tilt-child" data-depth="20">Meningkatkan kualitas visual acara, branding, dan publikasi Anda dengan presisi tinggi dan efek 3D interaktif.</p>
+        <div class="btn-wrapper tilt-child" data-depth="25">
+          <a href="pemesanan.html" class="btn-main btn-primary 3d-btn"><i class="fa-solid fa-cart-shopping"></i> Buat Pesanan</a>
+          <a href="portofolio.html" class="btn-main btn-whatsapp 3d-btn"><i class="fa-solid fa-images"></i> Lihat Karya</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3D Layanan Section -->
+  <main class="page-container" style="padding-top: 20px;">
+    <h2 class="section-title">Layanan Unggulan</h2>
+    <p class="section-subtitle">Pilihan solusi visual yang disesuaikan dengan kebutuhan Anda</p>
+    
+    <div class="portfolio-grid">
+      <div class="portfolio-card tilt-card" data-tilt-max="25">
+        <div class="tilt-child" data-depth="20">
+          <i class="fa-solid fa-scroll fa-3x service-icon-3d"></i>
+        </div>
+        <h3 class="card-title tilt-child" data-depth="15">Spanduk & Baliho</h3>
+        <p class="card-desc tilt-child" data-depth="10">Desain spanduk resolusi tinggi siap cetak untuk panggung, baliho, dan event besar dengan visual yang memukau.</p>
+      </div>
+
+      <div class="portfolio-card tilt-card" data-tilt-max="25">
+        <div class="tilt-child" data-depth="20">
+          <i class="fa-solid fa-file-powerpoint fa-3x service-icon-3d"></i>
+        </div>
+        <h3 class="card-title tilt-child" data-depth="15">Flyer & Brosur</h3>
+        <p class="card-desc tilt-child" data-depth="10">Publikasi digital dan cetak dengan tata letak informatif, estetis, dan gaya modern untuk efektivitas promosi.</p>
+      </div>
+
+      <div class="portfolio-card tilt-card" data-tilt-max="25">
+        <div class="tilt-child" data-depth="20">
+          <i class="fa-solid fa-icons fa-3x service-icon-3d"></i>
+        </div>
+        <h3 class="card-title tilt-child" data-depth="15">Identitas Visual & Logo</h3>
+        <p class="card-desc tilt-child" data-depth="10">Branding identitas unik untuk organisasi, produk, maupun event profesional dengan karakter visual kuat.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- 3D Stats Counter Section -->
+  <section class="stats-section">
+    <div class="stat-card tilt-card" data-tilt-max="15">
+      <h3 class="counter tilt-child" data-depth="20" data-target="150">0</h3>
+      <p class="tilt-child" data-depth="10">Proyek Selesai</p>
+    </div>
+    <div class="stat-card tilt-card" data-tilt-max="15">
+      <h3 class="counter tilt-child" data-depth="20" data-target="99">0</h3>
+      <p class="tilt-child" data-depth="10">Kepuasan Klien (%)</p>
+    </div>
+    <div class="stat-card tilt-card" data-tilt-max="15">
+      <h3 class="counter tilt-child" data-depth="20" data-target="24">0</h3>
+      <p class="tilt-child" data-depth="10">Jam Respon Cepat</p>
+    </div>
+  </section>
+
+  <button id="backToTop" class="back-to-top 3d-btn"><i class="fa-solid fa-arrow-up"></i></button>
+
+  <footer>
+    <p>&copy; 2026 Adam Grafis. All Rights Reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

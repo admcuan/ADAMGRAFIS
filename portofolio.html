@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portofolio — Adam Grafis (3D Parallax)</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Smooth Page Transition Loader -->
+  <div id="pageLoader" class="active">
+    <div class="spinner"></div>
+    <div class="loader-text">MEMUAT PORTOFOLIO 3D...</div>
+  </div>
+
+  <!-- Ambient Parallax Background Orbs -->
+  <div class="parallax-bg-glow">
+    <div class="glow-orb orb-1" data-parallax-speed="-0.04"></div>
+    <div class="glow-orb orb-2" data-parallax-speed="0.06"></div>
+  </div>
+
+  <header class="parallax-header">
+    <a href="index.html" class="brand tilt-card" data-tilt-max="15">
+      <img src="logo AG.png" alt="Adam Grafis Logo" class="brand-logo-3d">
+      <span class="brand-name">ADAM GRAFIS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Beranda</a></li>
+      <li><a href="portofolio.html" class="active">Portofolio</a></li>
+      <li><a href="pemesanan.html">Pemesanan</a></li>
+      <li><button id="themeToggle" class="theme-toggle"><i class="fa-solid fa-sun"></i></button></li>
+    </ul>
+  </header>
+
+  <main class="page-container">
+    <h1 class="section-title">Portofolio Karya</h1>
+    <p class="section-subtitle">Jelajahi galeri desain interaktif dengan efek kedalaman 3D</p>
+
+    <div class="search-container">
+      <input type="text" id="searchPortfolio" class="search-input 3d-input" placeholder="Cari nama desain...">
+    </div>
+
+    <div class="filter-wrapper">
+      <button class="filter-btn active 3d-btn" data-filter="all">Semua</button>
+      <button class="filter-btn 3d-btn" data-filter="spanduk">Spanduk</button>
+      <button class="filter-btn 3d-btn" data-filter="flyer">Flyer</button>
+      <button class="filter-btn 3d-btn" data-filter="logo">Logo</button>
+    </div>
+
+    <div class="portfolio-grid">
+      <div class="portfolio-card tilt-card" data-category="flyer" data-tilt-max="20">
+        <div class="card-img-container tilt-child" data-depth="25">
+          <img src="flyer haflah.png" alt="Flyer Haflah Akhirussanah">
+        </div>
+        <div class="card-body tilt-child" data-depth="15">
+          <div class="card-tag">Flyer</div>
+          <h3 class="card-title">Flyer Haflah Akhirussanah</h3>
+          <p class="card-desc">Desain flyer pelepasan siswa dengan konsep islami modern.</p>
+        </div>
+      </div>
+
+      <div class="portfolio-card tilt-card" data-category="spanduk" data-tilt-max="20">
+        <div class="card-img-container tilt-child" data-depth="25">
+          <img src="SPNDK_HAFLAH & SANTUNAN SMP BUDI ARTI CIREBON.png" alt="Spanduk Haflah & Santunan">
+        </div>
+        <div class="card-body tilt-child" data-depth="15">
+          <div class="card-tag">Spanduk</div>
+          <h3 class="card-title">Spanduk Haflah & Santunan</h3>
+          <p class="card-desc">Banner panggung utama SMP Budi Arti Cirebon.</p>
+        </div>
+      </div>
+
+      <div class="portfolio-card tilt-card" data-category="logo" data-tilt-max="20">
+        <div class="card-img-container tilt-child" data-depth="25">
+          <img src="Visual Laskar Gandrung Nabi Cabang Jawa Barat.png" alt="Visual Laskar Gandrung Nabi">
+        </div>
+        <div class="card-body tilt-child" data-depth="15">
+          <div class="card-tag">Logo</div>
+          <h3 class="card-title">Visual Laskar Gandrung Nabi</h3>
+          <p class="card-desc">Identitas visual baliho acara keagamaan Jawa Barat.</p>
+        </div>
+      </div>
+
+      <div class="portfolio-card tilt-card" data-category="spanduk" data-tilt-max="20">
+        <div class="card-img-container tilt-child" data-depth="25">
+          <img src="spanduk malam puncak.png" alt="Spanduk Malam Puncak">
+        </div>
+        <div class="card-body tilt-child" data-depth="15">
+          <div class="card-tag">Spanduk</div>
+          <h3 class="card-title">Spanduk Malam Puncak</h3>
+          <p class="card-desc">Desain latar panggung utama untuk festival besar.</p>
+        </div>
+      </div>
+
+      <div class="portfolio-card tilt-card" data-category="spanduk" data-tilt-max="20">
+        <div class="card-img-container tilt-child" data-depth="25">
+          <img src="layout banner rigging fullfull .png" alt="Layout Banner Rigging">
+        </div>
+        <div class="card-body tilt-child" data-depth="15">
+          <div class="card-tag">Spanduk</div>
+          <h3 class="card-title">Layout Banner Rigging Stage</h3>
+          <p class="card-desc">Tata letak visual untuk kerangka panggung rigging full stage.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="lightboxModal" class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-content 3d-pop" id="lightboxImg">
+    <div id="lightboxCaption" style="color:#fff; margin-top:15px; font-weight:600;"></div>
+  </div>
+
+  <button id="backToTop" class="back-to-top 3d-btn"><i class="fa-solid fa-arrow-up"></i></button>
+
+  <footer>
+    <p>&copy; 2026 Adam Grafis. All Rights Reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
