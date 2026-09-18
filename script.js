@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 2. Theme Management Via URL Parameter
   const urlParams = new URLSearchParams(window.location.search);
-  let currentTheme = urlParams.get('theme') || 'dark';
+  let currentTheme = urlParams.get('theme') || 'light';
 
   function applyTheme(theme) {
     document.documentElement.setAttribute("data-theme", theme);
@@ -69,56 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 3. 3D Parallax Tilt Effect on Mouse move
-  const tiltCards = document.querySelectorAll(".tilt-card");
-
-  tiltCards.forEach(card => {
-    const maxTilt = parseFloat(card.getAttribute("data-tilt-max")) || 15;
-    const children = card.querySelectorAll(".tilt-child");
-
-    card.addEventListener("mousemove", (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-
-      const tiltX = ((y - centerY) / centerY) * -maxTilt;
-      const tiltY = ((x - centerX) / centerX) * maxTilt;
-
-      card.style.transform = `rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg)`;
-
-      children.forEach(child => {
-        const depth = parseFloat(child.getAttribute("data-depth")) || 10;
-        const moveX = ((x - centerX) / centerX) * depth;
-        const moveY = ((y - centerY) / centerY) * depth;
-        child.style.transform = `translate3d(${moveX.toFixed(2)}px, ${moveY.toFixed(2)}px, ${depth}px)`;
-      });
-    });
-
-    card.addEventListener("mouseleave", () => {
-      card.style.transform = `rotateX(0deg) rotateY(0deg)`;
-      children.forEach(child => {
-        child.style.transform = `translate3d(0px, 0px, 0px)`;
-      });
-    });
-  });
-
-  // 4. Background Mouse Scroll & Move Parallax Orbs
-  const bgOrbs = document.querySelectorAll(".glow-orb");
-
-  document.addEventListener("mousemove", (e) => {
-    const mouseX = e.clientX - window.innerWidth / 2;
-    const mouseY = e.clientY - window.innerHeight / 2;
-
-    bgOrbs.forEach(orb => {
-      const speed = parseFloat(orb.getAttribute("data-parallax-speed")) || 0.05;
-      orb.style.transform = `translate3d(${mouseX * speed}px, ${mouseY * speed}px, 0)`;
-    });
-  });
-
-  // 5. Lightbox Modal Gambar
+  // 3. Lightbox Modal Gambar
   const modal = document.getElementById("lightboxModal");
   const modalImg = document.getElementById("lightboxImg");
   const captionText = document.getElementById("lightboxCaption");
@@ -213,7 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function calculatePrice() {
     if (!categorySelect || !sizeInput || !priceDisplay) return 0;
 
-    const baseRates = { spanduk: 25000, flyer: 150000, stage: 50000 };
+    const baseRates = { spanduk: 50000, flyer: 40000, stage: 60000 };
     const selectedCategory = categorySelect.value;
     const qty = parseFloat(sizeInput.value) || 1;
 
